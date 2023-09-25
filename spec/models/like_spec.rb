@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Like, type: :model do
   describe '#update_post_likes_counter' do
     it 'updates the post likes_counter attribute' do
-      user = User.create(name: 'Htet')
+      user = User.create(name: 'Aima')
       post = Post.create(title: 'Hello', author: user)
 
       Like.create(user:, post:)

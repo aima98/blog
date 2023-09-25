@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  subject { Post.new(title: 'Welcome', author: User.create(name: 'Jame')) }
+  subject { Post.new(title: 'Welcome', author: User.create(name: 'Sham')) }
 
   before { subject.save }
 
@@ -47,7 +47,7 @@ RSpec.describe Post, type: :model do
 
   describe '#update_user_posts_counter' do
     it 'updates the user posts_counter attribute' do
-      user = User.create(name: 'Hary')
+      user = User.create(name: 'Hussein')
       post = Post.create(title: 'Hello', author: user)
 
       post.update_user_posts_counter
@@ -57,7 +57,7 @@ RSpec.describe Post, type: :model do
 
   describe '#five_most_recent_comments' do
     it 'returns the 5 most recent comments' do
-      user = User.create(name: 'John')
+      user = User.create(name: 'Aima')
       comment1 = Comment.create(author: user, post: subject, text: 'comment 1', created_at: 5.day.ago)
       comment2 = Comment.create(author: user, post: subject, text: 'comment 2', created_at: 4.day.ago)
       comment3 = Comment.create(author: user, post: subject, text: 'comment 3', created_at: 3.day.ago)
