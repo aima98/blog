@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.create(name: 'Jame') }
+  let(:user) { User.create(name: 'Sham') }
 
   context 'validation tests' do
     it 'name should be present' do
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
 
   context 'three_most_recent_posts' do
     it 'returns the 3 most recent posts' do
-      user = User.create(name: 'Hary')
+      user = User.create(name: 'Hussein')
       post1 = Post.create(title: 'post1', author: user, created_at: 4.days.ago)
       post2 = Post.create(title: 'post2', author: user, created_at: 3.days.ago)
       post3 = Post.create(title: 'post3', author: user, created_at: 2.days.ago)
