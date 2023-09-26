@@ -161,6 +161,10 @@ GEM
       loofah (~> 2.21)
       nokogiri (~> 1.14)
     railties (7.0.8)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
       method_source
@@ -241,7 +245,9 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.8)
-  rspec-rails
+  rails-controller-testing
+  rspec-rails (~> 4.0.0.beta2)
+  rubocop (>= 1.0, < 2.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
