@@ -1,1 +1,16 @@
-<h1>Here is post details for special user</h1>
+<div class="container mt-5">
+  <div class="card border-2 border-dark">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="card-title m-0"><%= @post.title %> by <%= @post.author.name %></h4>
+        <div class="d-flex gap-1">
+          <p class="m-0">Comments: <%= @post.comment_counter %>,</p>
+          <p class="m-0">Likes: <%= @post.likes_counter %></p>
+        </div>
+      </div>
+      <p class="mt-2"><%= @post.text %></p>
+    </div>
+  </div>
+</div>
+
+  <%= render partial: 'pages/comments_card', locals: { comments: @post.comments } unless @post.comments.empty? %>
