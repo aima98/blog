@@ -1,9 +1,13 @@
-<div class="container mt-2">
+<div class="container-fluid mt-2">
 <div class="card border-2 border-dark">
   <div class="card-body">
-    <% comments.each do |comment| %>
+  <% comments.each do |comment| %>
+    <% if comment.author %>
       <p><%= comment.author.name %>: <%= comment.text %></p>
+      <% else %>
+      <p><%= comment.text %></p>
     <% end %>
   </div>
-</div>
+  <% end %>
+  </div>
 </div>
