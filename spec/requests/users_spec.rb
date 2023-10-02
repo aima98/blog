@@ -1,39 +1,39 @@
 require 'rails_helper'
-
 RSpec.describe 'Users', type: :request do
   describe 'GET /index' do
-    it 'returns a success response' do
-      get users_path
+    before(:each) do
+      get '/users'
+    end
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
-
-    it 'renders the index template' do
-      get users_path
-      expect(response).to render_template(:index)
+    it 'should return the correct status' do
+      expect(response.status).to eq(200)
     end
-
-    it 'includes correct placeholder text in the response body' do
-      get users_path
-      expect(response.body).to include('Here is list of all the users')
+    it 'should render the correct template' do
+      expect(response).to render_template('index')
+    end
+    it 'include the correct placeholder' do
+      expect(response.body).to include('Welcome To User Page')
     end
   end
 
-  describe 'GET /users/:id' do
-    let(:user) { User.create(name: 'Amelia', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from USA.', posts_counter: 0) }
-
-    it 'returns a success response' do
-      get user_path(user)
+  describe 'GET /show' do
+    before(:each) do
+      @user = User.create(name: 'Aima', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Web Developer')
+      get user_path(id: @user.id)
+    end
+    it 'returns http success' do
       expect(response).to have_http_status(:success)
     end
-
-    it 'renders the show template' do
-      get user_path(user)
-      expect(response).to render_template(:show)
+    it 'should return the correct status' do
+      expect(response.status).to eq(200)
     end
-
-    it 'includes correct placeholder text in the response body' do
-      get user_path(user)
-      expect(response.body).to include('User Details')
+    it 'should render the correct template' do
+      expect(response).to render_template('show')
+    end
+    it 'include the correct placeholder' do
+      expect(response.body).to include('See all posts')
     end
   end
 end

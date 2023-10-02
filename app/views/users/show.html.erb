@@ -17,18 +17,20 @@
 </div>
 
 <div class="container-fluid mt-5">
-  <% @posts.each do |post| %>
-    <div class="card border-2 border-dark mb-3">
-      <div class="card-body">
-        <h5 class="card-title"><%= post.title %></h5>
-        <p class="card-text"><%= post.text %></p>
-        <div class="d-flex gap-1 justify-content-end">
-          <p class="m-0">Comments: <%= post.comment_counter %>,</p>
-          <p class="m-0">Likes: <%= post.likes_counter %></p>
+<% @user.recent_posts.each do |post|%>
+    <%= link_to user_post_path(user_id: post.author_id, id: post.id) do%>
+      <div class="post-card bg-gray-200 border-2 my-5  rounded-md w-[700px]  hover:bg-gray-400">
+          <h2 class=" font-semibold text-lg bg-black/80 text-white px-3 py-1"><%= post.title %></h2>
+          <p class="line-clamp-2 px-2 py-1 text-sm"><%= post.text %></p>
+          <div class="reactions p-4">
+              <span class="font-semibold text-sm">Comments: <%== post.comment_counter%> </span>
+              <span class="font-semibold text-sm">Likes: <%== post.like_counter%> </span>
+          </div>
         </div>
-      </div>
+        <% end %>
+        <% end%>
     </div>
-  <% end %>
+    
   <div class="text-center">
   <%= link_to "See All Posts", user_posts_path(@user), class: "btn btn-dark mb-5" %>
   </div>
