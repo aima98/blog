@@ -6,9 +6,8 @@ class PostsController < ApplicationController
     page = params[:page].to_i
     page = 1 if page <= 0
 
-    @posts = Post.includes(:author)
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:author, :comments)
+    @posts = @user.posts.includes(:comments)
       .order(created_at: :desc)
       .offset((page - 1) * per_page)
       .limit(per_page)
