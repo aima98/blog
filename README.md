@@ -90,6 +90,13 @@ To run tests, run the following command:
 - GitHub: [@aima98](https://github.com/aima98)
 - LinkedIn: [Oumaima Nejjari](https://www.linkedin.com/in/oumaimanejjari)
 
+👤 **Okolie Tochukwu**
+
+- GitHub: [@ticoniq](https://github.com/ticoniq)
+- Twitter: [@ticoniq_](https://twitter.com/ticoniq_)
+- LinkedIn: [ticoniq](https://linkedin.com/in/ticoniq)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
