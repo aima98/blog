@@ -9,9 +9,9 @@ class PostsController < ApplicationController
     @posts = Post.includes(:author)
     @user = User.find(params[:user_id])
     @posts = @user.posts.includes(:author, :comments)
-                  .order(created_at: :desc)
-                  .offset((page - 1) * per_page)
-                  .limit(per_page)
+        .order(created_at: :desc)
+        .offset((page - 1) * per_page)
+        .limit(per_page)
 
     total_posts = @user.posts.count
     @total_pages = (total_posts.to_f / per_page).ceil
