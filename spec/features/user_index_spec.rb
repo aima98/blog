@@ -1,24 +1,38 @@
 require 'rails_helper'
-RSpec.describe 'User index', type: :feature do
-  before :each do
-    @user = User.create(name: 'Aima', photo: '
-https://picsum.photos/id/23/200', bio: 'web developer',
-                        post_counter: 0)
-    visit root_path
+
+RSpec.feature 'User Index', type: :feature do
+  scenario 'visiting the user index page' do
+    User.create(name: 'Kante', photo: 'https://unsplash.com/photos/OgqWLzWRSaI')
+    User.create(name: 'Hazard', photo: 'https://unsplash.com/photos/OgqWLzWRSaI')
+
+    visit users_path
+
+    expect(page).to have_content('Kante')
+    expect(page).to have_content('Hazard')
+    expect(page).to have_selector('img[src="https://unsplash.com/photos/OgqWLzWRSaI"]',
+                                  count: 2)
   end
-  it 'shows the correct content' do
-    expect(page).to have_content('Welcome To User Page')
+
+  scenario 'visiting the user index page, you see the number of posts each user has written..' do
+    user1 = User.create(name: 'Kante')
+    User.create(name: 'Hazard')
+    Post.create(author: user1, title: 'first post')
+    Post.create(author: user1, title: 'second post')
+    Post.create(author: user1, title: 'third post')
+
+    visit users_path
+
+    expect(page).to have_content('3')
+    expect(page).to have_content('0')
   end
-  it 'shows the number of posts each user has written' do
-    expect(page).to have_content('Number of posts')
-  end
-  it 'When I click on a user it should redirect to user/show page' do
-    click_on 'Aima'
-    expect(page).to have_content 'Aima'
-  end
-  it ' should return the correct css ' do
-    expect(page).to have_css("img[src*='
-https://picsum.photos/id/23/200
-']")
+
+  scenario 'clicking on a user redirects to their show page' do
+    user = User.create(name: 'Tuchel')
+
+    visit users_path
+
+    click_link 'Tuchel'
+
+    expect(page).to have_current_path(user_path(user))
   end
 end

@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.bio {
+  width: 98%;
+  margin-left: 10px;
+}

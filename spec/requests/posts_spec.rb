@@ -1,45 +1,41 @@
 require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
-  describe 'GET /index' do
-    before(:each) do
-      @user = User.create(name: 'Aima', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Web Developer')
-      get user_posts_path(@user.id)
-    end
-
-    it 'returns http success' do
+  describe 'GET /users/:user_id/posts' do
+    let(:user) { User.create(name: 'Jane', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from USA.', posts_counter: 0) }
+    it 'returns a success response' do
+      get user_posts_path(user)
       expect(response).to have_http_status(:success)
     end
-    it 'return the correct status' do
-      expect(response.status).to eq(200)
-    end
-    it 'should render the correct template' do
-      expect(response).to render_template('index')
+    it 'renders the index template' do
+      get user_posts_path(user)
+      expect(response).to render_template(:index)
     end
 
-    it 'should return the correct placeholder' do
-      expect(response.body).to include('Aima')
+    it 'includes correct placeholder text in the response body' do
+      get user_posts_path(user)
+      expect(response.body).to include('Here is a list of posts for a given user')
+      expect(response.body).to include('Jane')
     end
   end
 
-  describe 'GET /show' do
-    before(:each) do
-      @user = User.create(name: 'Aima', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Web Developer')
-      @post = Post.create(title: 'test', author_id: @user.id, text: 'this is testing')
-      get user_post_path(user_id: @user.id, id: @post.id)
+  describe 'GET /users/:user_id/posts/:id' do
+    let(:user) { User.create(name: 'Jane', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from USA.', posts_counter: 0) }
+    let(:post) do
+      user.posts.create(title: 'Sample Post', text: 'My first post', comment_counter: 0, likes_counter: 0)
     end
-
-    it 'returns http success' do
+    it 'returns a success response' do
+      get user_post_path(user, post)
       expect(response).to have_http_status(:success)
     end
-    it 'should return the correct status' do
-      expect(response.status).to eq(200)
-    end
-    it 'should render the correct template' do
-      expect(response).to render_template('show')
+    it 'renders the show template' do
+      get user_post_path(user, post)
+      expect(response).to render_template(:show)
     end
 
-    it 'should return the correct placeholder' do
-      expect(response.body).to include('Aima')
+    it 'includes correct placeholder text in the response body' do
+      get user_post_path(user, post)
+      expect(response.body).to include('Here is post details for special user')
+      expect(response.body).to include('Jane')
     end
   end
 end

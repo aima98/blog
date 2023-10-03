@@ -1,0 +1,12 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "db/**/*"
+    - "bin/*" 
+    - "config/**/*"
+    - "Guardfile"
+    - "Rakefile"
+    - "node_modules/**/*"
+    - "**/spec/**/*.rb"
+
+  DisplayCopNames: true
