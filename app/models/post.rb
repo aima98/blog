@@ -14,9 +14,13 @@ class Post < ApplicationRecord
   validates :comment_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validates :likes_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
-  # Callback
-
   after_save :update_user_posts_counter
+
+  def excerpt
+    return text unless text.length > 50
+
+    "#{text.slice(0, 50)} ..."
+  end
 
   def update_user_posts_counter
     author.update(posts_counter: author.posts.count)
