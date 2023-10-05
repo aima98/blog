@@ -15,8 +15,12 @@ class User < ApplicationRecord
   attribute :photo, :string
 
   # Validations
-  validates :name, presence: true
   validates :posts_counter, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :role, inclusion: { in: %w[admin user], message: '%<value>s is not a valid role [admin, user]' }
+
+  def is?(requested_role)
+    role == requested_role.to_s
+  end
 
   # Method
   def recent_posts

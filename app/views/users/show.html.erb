@@ -1,37 +1,19 @@
-<span class="d-flex justify-content-end mt-4">
-  <%= link_to "Create New Post", new_user_post_path(@user), class: "btn btn-success" %>
-</span>
-<div class="container-fluid">
-  <div class="row">
-    <%= render 'pages/user_card', user: @user %>
-  </div>
-</div>
-
-<div class="container-fluid mt-5">
-  <div class="card border-2 border-dark">
+<div class="container mt-5">
+  <%= render 'pages/user_card', user: @user %><br/>
+  <div class="card border-2 border-dark bio">
     <div class="card-body">
       <h4>Bio</h4>
       <p class="m-0"><%= @user.bio %></p>
     </div>
-  </div>
 </div>
-
-<div class="container-fluid mt-5">
-<% @user.recent_posts.each do |post|%>
-    <%= link_to user_post_path(user_id: post.author_id, id: post.id) do%>
-      <div class="post-card bg-gray-200 border-2 my-5  rounded-md w-[700px]  hover:bg-gray-400">
-          <h2 class=" font-semibold text-lg bg-black/80 text-white px-3 py-1"><%= post.title %></h2>
-          <p class="line-clamp-2 px-2 py-1 text-sm"><%= post.text %></p>
-          <div class="reactions p-4">
-              <span class="font-semibold text-sm">Comments: <%== post.comment_counter%> </span>
-              <span class="font-semibold text-sm">Likes: <%== post.like_counter%> </span>
-          </div>
-        </div>
-        <% end %>
-        <% end%>
-    </div>
-    
-  <div class="text-center">
-  <%= link_to "See All Posts", user_posts_path(@user), class: "btn btn-dark mb-5" %>
+  <% @posts.each do |post| %>
+    <a href="/users/<%= @user.id %>/posts/<%= post.id %>" class="text-decoration-none">
+      <div class="mb-3">
+        <%= render 'pages/post_card', post: post %>
+      </div>
+    </a>
+  <% end %>
+  <div class="w-100 mt-5 d-flex justify-content-center align-items-center">
+    <a href="/users/<%= @user.id %>/posts" class="btn btn-primary">See all posts</a>
   </div>
 </div>
